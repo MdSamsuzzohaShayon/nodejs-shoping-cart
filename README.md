@@ -7,4 +7,7 @@ adding data to data ase letter on I will use cms
 
 for adding data with seeder we need to go seed directory in terminal
 and run 
-'node product-seeder.js'
+
+```
+node product-seeder.js
+```
