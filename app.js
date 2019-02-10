@@ -6,7 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressHbs = require('express-handlebars');
-const mongoose = require('mongoose');
+
 
 
 
@@ -15,7 +15,7 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
-mongoose.connect('localhost:27017/shopping');
+
 
 
 // view engine setup
