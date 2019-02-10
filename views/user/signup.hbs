@@ -1,18 +1,18 @@
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-sm-6">
         <h1>Sign Up</h1>
         <h3>Error Validations</h3>
         <form action="/user/signup" method="post">
             <div class="form-group">
-                <label for="email" >E-Mail</label>
-                <input type="text" name="email" id="email" class="from-control">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
             </div>
             <div class="form-group">
-                <label for="password" >Password</label>
-                <input type="password" name="password" id="password" class="from-control">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password"placeholder="enter your password">
             </div>
             {{!-- MAKE SURE THE NAME _csrf EXECTLY SAME IN HERE. BY THIS NAME THE PACKAGE WILL IDENTIFY --}}
-            <input type="hiddin" name="_csrf" value="{{ csrfToken }}">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <button type="submit" class="btn btn-outline-success">Sign Up</button>
 
         </form>
