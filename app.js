@@ -9,6 +9,10 @@ const expressHbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const session = require('express-session');
 
+const passport = require('passport');
+const flash = require('connect-flash');
+
+
 
 
 const indexRouter = require('./routes/index');
@@ -42,6 +46,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // MAKE SURE THIS SESSTION SETUP IS BELOW THE COOKIE PARSER SETUP
 app.use(session({secret: 'mysupersecret', resave: false, saveUninitialized: false})); //IF resave IS SET TO TRUE THIS WILL SAVE TO THE SERVER IN EVERY REQUEST
+app.use(flash());// FLASH MUST BE INITILIZE BELOW THE EXPRESS SESSION SETUP
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

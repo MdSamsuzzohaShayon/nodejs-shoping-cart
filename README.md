@@ -39,4 +39,9 @@ This module now directly reads and writes cookies on req/res. Using cookie-parse
 
 ```npm install express-session```
 
+## Setup local strategy
+Like facebook, twitter we can build our own strategy to login in our website. Passport strategy for authenticating with a username and password.
+
+```npm install passport-local```
+
 
