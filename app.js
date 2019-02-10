@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressHbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 
 
@@ -39,6 +40,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// MAKE SURE THIS SESSTION SETUP IS BELOW THE COOKIE PARSER SETUP
+app.use(session({secret: 'mysupersecret', resave: false, saveUninitialized: false})); //IF resave IS SET TO TRUE THIS WILL SAVE TO THE SERVER IN EVERY REQUEST
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

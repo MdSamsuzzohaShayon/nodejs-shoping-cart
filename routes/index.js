@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
+const csrf = require('csurf');
+
+//IT REQUIRE SESSION TO BE ENABLED
+const csrfProtection = csrf();
+router.use(csrfProtection); // ALL THE ROUTE WITH ROUTER SHOULD BE PROTECTED WITH CSRF PROTECTION
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,5 +24,13 @@ router.get('/', function(req, res, next) {
     res.render('shop/index', { title: 'Shoping Cart', products: productChunks });
   });
 });
+
+router.get('/user/signup', (req, res, next)=>{
+  res.render('user/signup', {csrfToken: req.csrfToken()});
+});
+
+router.post('/user/signup', (req, res, next)=>{
+  res.redirect('/');
+})
 
 module.exports = router;
