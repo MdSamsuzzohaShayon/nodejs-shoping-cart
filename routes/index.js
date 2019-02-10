@@ -4,8 +4,16 @@ const Product = require('../models/product');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let products = Product.find();
-  res.render('shop/index', { title: 'Shoping Cart', products: products });
+  Product.find((err, docs)=>{
+    let productChunks = [];
+    //IN A ROW IN TEMPLATE ENGIN WE WILL RENDER THREE PRODUCT
+    // REST OF THEM WILL GO THO ANOTHER ROW
+    chunkSize = 3;
+    for(let i = 0; i<docs.length ; i+= chunkSize){
+      productChunks.push(docs.slice(i, i+chunkSize))
+    }
+    res.render('shop/index', { title: 'Shoping Cart', products: productChunks });
+  });
 });
 
 module.exports = router;

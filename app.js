@@ -16,15 +16,13 @@ const indexRouter = require('./routes/index');
 const app = express();
 
 
-mongoose.connect('localhost:27017/shopping');
 
-/*
 mongoose.connect('mongodb://localhost/shopping'); //IF TESTAROO DB IS ALREADY EXIST THEN OK. OR IF IT ISN'T IT WILL CREATE AUTOMATICLY
 mongoose.connection.once('open', function () {
     console.log("Connection has been made now let's make fireaowks");
 }).on('error', function (error) {
     console.log('Connection', error);
-});*/
+});
 
 // https://github.com/MdSamsuzzohaShayon/nodejs-shoping-cart
 
