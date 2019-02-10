@@ -11,7 +11,8 @@
                 <label for="password" >Password</label>
                 <input type="password" name="password" id="password" class="from-control">
             </div>
-            <input type="text" value="{{ csrfToken }}">
+            {{!-- MAKE SURE THE NAME _csrf EXECTLY SAME IN HERE. BY THIS NAME THE PACKAGE WILL IDENTIFY --}}
+            <input type="hiddin" name="_csrf" value="{{ csrfToken }}">
             <button type="submit" class="btn btn-outline-success">Sign Up</button>
 
         </form>
