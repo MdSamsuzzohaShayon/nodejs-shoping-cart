@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
     //IN A ROW IN TEMPLATE ENGIN WE WILL RENDER THREE PRODUCT
     // REST OF THEM WILL GO THO ANOTHER ROW
     chunkSize = 3;
+    //THIS FOR LOOP WILL OUTPUT 3 BY 3 TO ALL FROM DB
     for(let i = 0; i<docs.length ; i+= chunkSize){
       // For example, slice(1,4) extracts the second element through the fourth element (elements indexed 1, 2, and 3).
       // know more about slice methods
