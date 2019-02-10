@@ -6,6 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressHbs = require('express-handlebars');
+const mongoose = require('mongoose');
 
 
 
@@ -13,6 +14,13 @@ const indexRouter = require('./routes/index');
 
 
 const app = express();
+
+
+mongoose.connect('localhost:27017/shopping');
+
+// https://github.com/MdSamsuzzohaShayon/nodejs-shoping-cart
+
+
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
