@@ -11,8 +11,11 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
-const indexRouter = require('./routes/index');
 const validator = require('express-validator');
+
+
+const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
 
 const app = express();
 
@@ -76,6 +79,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
+
+app.use('/user', userRouter);
 app.use('/', indexRouter);
 
 

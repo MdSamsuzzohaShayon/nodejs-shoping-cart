@@ -1,14 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const Product = require('../models/product');
-const csrf = require('csurf');
-const passport = require('passport');
+const router = express.Router();
 
 
 
-//IT REQUIRE SESSION TO BE ENABLED
-const csrfProtection = csrf();
-router.use(csrfProtection); // ALL THE ROUTE WITH ROUTER SHOULD BE PROTECTED WITH CSRF PROTECTION
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -32,47 +28,5 @@ router.get('/', function (req, res, next) {
 });
 
 
-//
-router.get('/user/signup', (req, res, next) => {
-  // FLASH MESSAGE WILL BE STORE UNDER error
-  let messages = req.flash("error");
-  res.render('user/signup', {
-    csrfToken: req.csrfToken(),
-    messages: messages,
-    hasErrors: messages.length > 0
-  });
-});
-// REQUESTING FOR SIGNUP
-//LOCAL.SHIGNUP THIS IS INDICATING THE STRATEGY WE MADE IN PASSPORT.JS FILE
-router.post('/user/signup', passport.authenticate('local.signup', {
-  successRedirect: '/user/profile',
-  failureRedirect: '/user/signup',
-  failureFlash: true
-}));
-
-
-// SHOW THE DASHBOARD OR USER PROFILE
-router.get('/user/profile', (req, res, next) => {
-  res.render('user/profile');
-});
-
-
-
-router.get('/user/signin', (req, res, next) => {
-  // FLASH MESSAGE WILL BE STORE UNDER error
-  let messages = req.flash("error");
-  res.render('user/signin', {
-    csrfToken: req.csrfToken(),
-    messages: messages,
-    hasErrors: messages.length > 0
-  });
-});
-
-
-router.post('/user/signin', passport.authenticate('local.signin', {
-  successRedirect: '/user/profile',
-  failureRedirect: '/user/signin',
-  failureFlash: true
-}))
 
 module.exports = router;
