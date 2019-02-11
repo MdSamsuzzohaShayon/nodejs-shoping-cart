@@ -16,6 +16,13 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 
 
 
+router.get('/logout', isLoggedIn , (req, res, next)=>{
+    req.logout();
+    res.redirect('/');
+});
+
+
+
 // BY USING THIS FILTER IN FRONT OF ALL ROUTES CHECKING USER IS NOT LOGED IN
 router.use('/', notLoggedIn, (req, res, next)=>{
     next();
@@ -39,8 +46,8 @@ router.get('/signup', (req, res, next) => {
 // REQUESTING FOR SIGNUP
 //LOCAL.SHIGNUP THIS IS INDICATING THE STRATEGY WE MADE IN PASSPORT.JS FILE
 router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect: '/profile',
-    failureRedirect: '/signup',
+    successRedirect: '/user/profile',
+    failureRedirect: '/user/signup',
     failureFlash: true
 }));
 
@@ -79,11 +86,6 @@ router.post('/signin', passport.authenticate('local.signin', {
 
 
 
-
-router.get('/logout', (req, res, next)=>{
-    req.logout();
-    res.redirect('/');
-})
 
 
 
