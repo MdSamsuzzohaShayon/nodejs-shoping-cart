@@ -35,6 +35,12 @@ mongoose.connection.once('open', function () {
 });
 
 
+// const mongoURI = 'mongodb://localhost/shopping';
+// //MONGO CONNECTION
+// const conn = mongoose.createConnection(mongoURI);
+
+
+
 
 
 require('./config/passport');
