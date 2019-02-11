@@ -29,6 +29,8 @@ mongoose.connection.once('open', function () {
     console.log('Connection', error);
 });
 
+require('./config/passport');
+
 // https://github.com/MdSamsuzzohaShayon/nodejs-shoping-cart
 
 

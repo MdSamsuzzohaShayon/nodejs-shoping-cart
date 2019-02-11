@@ -24,6 +24,7 @@ passport.use('local.signup', new LocalStrategy({
         User.findOne({
                 'email': email
             },
+            // CHECKING THE EMAIL IS ALREADY REGISTER OR NOT
             (err, user) => {
                 if (err) {
                     return done(err);
@@ -35,8 +36,17 @@ passport.use('local.signup', new LocalStrategy({
                 }
                 let newUser = new User();
                 newUser.email = email;
-                newUser.password = password;
-            }
+                // ENCRYPT PASSWORD METHODS IS COMING FROM USER MODELS
+                newUser.password = newUser.encryptPassword(password);
 
-        )
+                //SAVING USER TO DATABASE
+                newUser.save((err, result) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done(null, newUser);
+                });
+
+            }
+        );
     }));

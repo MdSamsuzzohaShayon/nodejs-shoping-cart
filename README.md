@@ -44,4 +44,12 @@ Like facebook, twitter we can build our own strategy to login in our website. Pa
 
 ```npm install passport-local```
 
+## Encrypt data with bcrypt
+encrypting data with bcrypt-nodejs (hashSync, genSaltSync)
+and saving encrypted data to the database after checking the email is already there or not
+
+```npm install bcrypt-nodejs```
+
+
+
 
