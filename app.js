@@ -79,6 +79,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
+//DEFAULT EXPRESS MIDDLEWARE SETUP
+app.use((req, res, next)=>{
+  // GLOBAL PROPERTIES OR VIEWS THAT WILL BE AVAILABLE IN VIEWS
+  res.locals.login = req.isAuthenticated();
+  next(); //let the request continue
+})
+
 
 app.use('/user', userRouter);
 app.use('/', indexRouter);
