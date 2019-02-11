@@ -65,6 +65,9 @@ and saving encrypted data to the database after checking the email is already th
 
 ```npm install bcrypt-nodejs```
 
+## express validation
+```npm install express-validator```
+
 
 
 

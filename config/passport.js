@@ -20,7 +20,19 @@ passport.use('local.signup', new LocalStrategy({
         passwordField: 'password',
         passReqToCallback: true
     },
+    //THIS FUNCTION WILL USE IN THE ROUTE METHOD AS CALLBACK
     (req, email, password, done) => {
+        // VLIDATING WITH EXPRESS VALIDATOR
+        req.checkBody('email', 'Invalid Email').notEmpty().isEmail();
+        req.checkBody('password', 'Invalid password').notEmpty().isLength({min: 4});
+        let errors = req.validationErrors();
+        if(errors){
+            let messages = [];
+            errors.forEach((error)=>{
+                messages.push(error.msg);
+            });
+            return done(null, false, req.flash('error', messages));
+        }
         User.findOne({
                 'email': email
             },
