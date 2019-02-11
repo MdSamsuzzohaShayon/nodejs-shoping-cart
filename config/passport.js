@@ -25,11 +25,13 @@ passport.use('local.signup', new LocalStrategy({
                 'email': email
             },
             (err, user) => {
-                if(err){
+                if (err) {
                     return done(err);
                 }
-                if(user){
-                    return done(null, false, {message: "Email is already in use"});
+                if (user) {
+                    return done(null, false, {
+                        message: "Email is already in use"
+                    });
                 }
                 let newUser = new User();
                 newUser.email = email;
