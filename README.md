@@ -39,6 +39,21 @@ This module now directly reads and writes cookies on req/res. Using cookie-parse
 
 ```npm install express-session```
 
+## Passport js
+Simple, unobtrusive authentication for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application.
+
+##### passport.js inside config file
+
+- serializeUser
+- deserializeUser
+- create new strategy
+    - check alreary registed or not
+    - save user to the database
+- authenticate
+
+```npm install passport```
+
+
 ## Setup local strategy
 Like facebook, twitter we can build our own strategy to login in our website. Passport strategy for authenticating with a username and password.
 

@@ -34,8 +34,12 @@ router.get('/', function (req, res, next) {
 
 //
 router.get('/user/signup', (req, res, next) => {
+  // FLASH MESSAGE WILL BE STORE UNDER error
+  let messages = req.flash("error");
   res.render('user/signup', {
-    csrfToken: req.csrfToken()
+    csrfToken: req.csrfToken(),
+    messages: messages,
+    hasErrors: messages.length > 0
   });
 });
 // REQUESTING FOR SIGNUP
