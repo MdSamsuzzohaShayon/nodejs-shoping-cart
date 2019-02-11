@@ -3,6 +3,14 @@ const passport = require('passport');
 const User = require('../models/user');
 const LocalStrategy = require('passport-local').Strategy;
 
+
+
+
+
+
+
+
+
 //THIS WILL TELL THE PASSPORT HOW TO STORE USER IN THE SESSION
 passport.serializeUser((user, done) => {
     //STORE USER IN SESSION SERILIZE BY ID
@@ -14,6 +22,18 @@ passport.deserializeUser((id, done) => {
         done(err, user)
     })
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //CREATE STRATEGY FOR SIGN UP
@@ -69,15 +89,32 @@ passport.use('local.signup', new LocalStrategy({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 //CREATE STRATEGY FOR SIGN IN
 passport.use('local.signin', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true
     },
-    (req, email, passport, done) => {
+    (req, email, password, done) => {
         //DOING THE VALIDATION AGAIN
-        req.checkBody('email', 'Invalid Email').notEmpty();
+        req.checkBody('email', 'Invalid Email').notEmpty().isEmail();
         req.checkBody('password', 'Invalid password').notEmpty();
         let errors = req.validationErrors();
         if (errors) {
@@ -90,26 +127,16 @@ passport.use('local.signin', new LocalStrategy({
 
 
 
-        User.findOne({
-                'email': email
-            },
-            // CHECKING THE EMAIL IS ALREADY REGISTER OR NOT
-            (err, user) => {
+        User.findOne({'email': email}, (err, user) => {
                 if (err) {
                     return done(err);
                 }
                 if (!user) {
-                    return done(null, false, {
-                        message: "No user found"
-                    });
+                    return done(null, false, { message: "No user found" });
                 }
                 if (!user.validPassword(password)) {
-                    return done(null, false, {
-                        message: "Wrong password"
-                    });
+                    return done(null, false, {message: "Wrong password"});
                 }
-                return done(null, user)    
+                return done(null, user) ;
             });
-
-
-    }));
+}));

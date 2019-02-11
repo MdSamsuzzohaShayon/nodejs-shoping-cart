@@ -19,7 +19,7 @@ userSchema.methods.encryptPassword = (password)=>{
 }
 
 //CHECKING PASSWORD MATCHES THE HASH PASSWORD
-userSchema.methods.validPassword = (password)=>{
+userSchema.methods.validPassword = function(password){
     return bcrypt.compareSync(password, this.password);
     // this.password REFERS TO THE PASSWORD IN USERSCHEMA MODELS 
 }
