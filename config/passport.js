@@ -15,6 +15,8 @@ passport.deserializeUser((id, done) => {
     })
 });
 
+
+//CREATE STRATEGY FOR SIGN UP
 passport.use('local.signup', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -24,11 +26,13 @@ passport.use('local.signup', new LocalStrategy({
     (req, email, password, done) => {
         // VLIDATING WITH EXPRESS VALIDATOR
         req.checkBody('email', 'Invalid Email').notEmpty().isEmail();
-        req.checkBody('password', 'Invalid password').notEmpty().isLength({min: 4});
+        req.checkBody('password', 'Invalid password').notEmpty().isLength({
+            min: 4
+        });
         let errors = req.validationErrors();
-        if(errors){
+        if (errors) {
             let messages = [];
-            errors.forEach((error)=>{
+            errors.forEach((error) => {
                 messages.push(error.msg);
             });
             return done(null, false, req.flash('error', messages));
@@ -61,4 +65,51 @@ passport.use('local.signup', new LocalStrategy({
 
             }
         );
+    }));
+
+
+
+//CREATE STRATEGY FOR SIGN IN
+passport.use('local.signin', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    },
+    (req, email, passport, done) => {
+        //DOING THE VALIDATION AGAIN
+        req.checkBody('email', 'Invalid Email').notEmpty();
+        req.checkBody('password', 'Invalid password').notEmpty();
+        let errors = req.validationErrors();
+        if (errors) {
+            let messages = [];
+            errors.forEach((error) => {
+                messages.push(error.msg);
+            });
+            return done(null, false, req.flash('error', messages));
+        }
+
+
+
+        User.findOne({
+                'email': email
+            },
+            // CHECKING THE EMAIL IS ALREADY REGISTER OR NOT
+            (err, user) => {
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    return done(null, false, {
+                        message: "No user found"
+                    });
+                }
+                if (!user.validPassword(password)) {
+                    return done(null, false, {
+                        message: "Wrong password"
+                    });
+                }
+                return done(null, user)    
+            });
+
+
     }));
