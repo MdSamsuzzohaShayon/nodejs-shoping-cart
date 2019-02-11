@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
 const csrf = require('csurf');
+const passport = require('passport');
 
 
 
@@ -30,19 +31,24 @@ router.get('/', function (req, res, next) {
   });
 });
 
+
+//
 router.get('/user/signup', (req, res, next) => {
   res.render('user/signup', {
     csrfToken: req.csrfToken()
   });
 });
-
-router.post('/user/signup', passport.authenticate('local.signup'), {
-  successRedirect: '/profile',
-  failureRedirect: '/signup',
+// REQUESTING FOR SIGNUP
+//LOCAL.SHIGNUP THIS IS INDICATING THE STRATEGY WE MADE IN PASSPORT.JS FILE
+router.post('/user/signup', passport.authenticate('local.signup', {
+  successRedirect: '/user/profile',
+  failureRedirect: '/user/signup',
   failureFlash: true
-});
+}));
 
-router.get('/profile', (req, res, next) => {
+
+// SHOW THE DASHBOARD OR USER PROFILE
+router.get('/user/profile', (req, res, next) => {
   res.render('user/profile');
 });
 
