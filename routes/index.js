@@ -1,6 +1,7 @@
 const express = require('express');
 const Product = require('../models/product');
 const router = express.Router();
+const Cart = require('../models/cart');
 
 
 
@@ -30,6 +31,20 @@ router.get('/', function (req, res, next) {
 
 router.get('/add-to-cart/:id', (req, res, next) => {
   const productId = req.params.id;
+  //CREATE A NEW ITEM  AND INTREGATE WITH OLD ONE
+  let cart = new Cart(req.session.cart ? req.session.cart : {items: {}}); // IF I HAVE A CART THEN I WILL PASS 
+
+  Product.findById(productId, (err, product)=>{
+    if(err){
+      return res.redirect('/');
+    }
+    cart.add(product, product.id);
+    // storing in cart object in session
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect('/');
+  });
+
 });
 
 
