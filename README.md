@@ -69,5 +69,8 @@ and saving encrypted data to the database after checking the email is already th
 ```npm install express-validator```
 
 
+## connect mongo
+MongoDB session store for Connect and Express. 
 
+```npm install connect-mongo```
 
