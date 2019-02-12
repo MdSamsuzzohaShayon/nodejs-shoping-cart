@@ -28,5 +28,10 @@ router.get('/', function (req, res, next) {
 });
 
 
+router.get('/add-to-cart/:id', (req, res, next) => {
+  const productId = req.params.id;
+});
+
+
 
 module.exports = router;
